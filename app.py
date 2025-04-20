@@ -29,11 +29,8 @@ class EC2Stack(Stack):
         instance = ec2.Instance(self, "MyInstance",
         instance_type=instance_type, machine_image=machine_image,
         device_name="/dev/sda1", volume=ec2.BlockDeviceVolume.ebs(20), 
-        role=iam.Role(self, "LabRole",))
-        
-        # Definir la aplicación CDK y el stack        
-        assumed_by=iam.ArnPrincipal("arn:aws:iam::478701513931:role/LabRole")  # ARN del rol LabRole
-
+        role=iam.Role(self, "LabRole",
+        assumed_by=iam.ArnPrincipal("arn:aws:iam::478701513931:role/LabRole")))  # ARN del rol LabRole
 
 app = App()
 app.synth(p, "EC2Stack")
